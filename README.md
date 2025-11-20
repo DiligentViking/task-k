@@ -1,7 +1,3 @@
-<h1 align="center"> 📜 Efficientus 📜 <h1>
+<h1 align="center">Task-K</h1>
 
-<h3 align="center">“<i>Invenire viam efficientissimam</i> -- Find the most efficient way”</h3>
-
-___
-
-A TOP to-do list project.  I hope you find it an innovative and intuitive app to help you live/love your life.
+<h3 align="center">A to-do app inspired by <a href="https://zero-k.info">Zero-K</a>, the coolest RTS game.</h3>
