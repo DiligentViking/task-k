@@ -3,10 +3,6 @@ export function createListModel() {
 
   const showData = () => console.log(lists);
 
-  const updateTodo = (listName, todoID, prop, val) => {
-    lists[listName].todos[todoID][prop] = val;
-  }
-
   return {
     addList(listName) {
       if (lists[listName]) {
@@ -39,12 +35,12 @@ export function createListModel() {
 
 
     markTodoAsDone(listName, todoID) {
-      updateTodo(listName, todoID, 'isDone', 1);
+      lists[listName].todos[todoID].isDone = 1;
       showData();
     },
 
     markTodoAsNotDone(listName, todoID) {
-      updateTodo(listName, todoID, 'isDone', null);
+      lists[listName].todos[todoID].isDone = null;
       showData();
     },
   };
