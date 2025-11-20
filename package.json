@@ -1,7 +1,7 @@
 {
-  "name": "efficientus",
+  "name": "task-k",
   "version": "1.0.0",
-  "description": "<h1 align=\"center\"> 📜 Efficientus 📜 <h1>",
+  "description": "<h1 align=\"center\">Task-K<h1>",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DiligentViking/efficientus.git"
+    "url": "git+https://github.com/DiligentViking/task-k.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DiligentViking/efficientus/issues"
+    "url": "https://github.com/DiligentViking/task-k/issues"
   },
-  "homepage": "https://github.com/DiligentViking/efficientus#readme",
+  "homepage": "https://github.com/DiligentViking/task-k#readme",
   "devDependencies": {
     "css-loader": "^7.1.2",
     "html-loader": "^5.1.0",
