@@ -3,14 +3,6 @@ export function createListModel() {
 
   const showData = () => console.log(lists);
 
-  const checkListExistence = (listName) => {
-    if (!lists[listName]) {
-      console.error('List does not exist');
-      return false;
-    }
-    return true;
-  }
-
   const updateTodo = (listName, todoID, prop, val) => {
     lists[listName].todos[todoID][prop] = val;
   }
@@ -41,23 +33,17 @@ export function createListModel() {
     // Todo Funcs //
 
     addTodo(listName, title, notes, priority, datetimedue, isDone=null) {
-      if (!checkListExistence(listName)) return;
-
       lists[listName].todos.push({title, notes, priority, datetimedue, isDone});
       showData();
     },
 
 
     markTodoAsDone(listName, todoID) {
-      if (!checkListExistence(listName)) return;
-
       updateTodo(listName, todoID, 'isDone', 1);
       showData();
     },
 
     markTodoAsNotDone(listName, todoID) {
-      if (!checkListExistence(listName)) return;
-
       updateTodo(listName, todoID, 'isDone', null);
       showData();
     },
