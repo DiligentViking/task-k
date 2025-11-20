@@ -1,7 +1,11 @@
 export function createListModel() {
   const lists = {};
 
-  const showData = () => console.log(lists);
+  localStorage.clear();  // Devving
+
+  const save = () => {
+    localStorage.setItem('lists', JSON.stringify(lists));
+  }
 
   return {
     addList(listName) {
@@ -11,7 +15,7 @@ export function createListModel() {
       }
 
       lists[listName] = {todos: []};
-      showData();
+      save();
     },
 
 
@@ -22,7 +26,7 @@ export function createListModel() {
       }
 
       delete lists[listName];
-      showData();
+      save();
     },
 
 
@@ -30,18 +34,18 @@ export function createListModel() {
 
     addTodo(listName, title, notes, priority, datetimedue, isDone=null) {
       lists[listName].todos.push({title, notes, priority, datetimedue, isDone});
-      showData();
+      save();
     },
 
 
     markTodoAsDone(listName, todoID) {
       lists[listName].todos[todoID].isDone = 1;
-      showData();
+      save();
     },
 
     markTodoAsNotDone(listName, todoID) {
       lists[listName].todos[todoID].isDone = null;
-      showData();
+      save();
     },
   };
 }
