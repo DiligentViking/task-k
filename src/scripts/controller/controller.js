@@ -1,3 +1,7 @@
 export function createController(model, view) {
-  console.log({model, view});
+  return {
+    init() {
+      view.renderCustomLists(model.getLists());
+    },
+  };
 };

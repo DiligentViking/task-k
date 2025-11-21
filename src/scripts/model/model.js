@@ -23,6 +23,11 @@ export function createModel() {
   }
 
   return {
+    getLists() {
+      return Object.keys(lists).slice(1);
+    },
+
+
     addList(listName) {
       if (lists[listName]) {
         console.error('List already exists');

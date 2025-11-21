@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(51, 51, 51);
+}
+
+.todo-app {
+  display: flex;
+}
+
+.sidebar {
+  border: 1px solid grey;
+}
+
+.list {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.today {
+  margin-bottom: 20px;
+}
