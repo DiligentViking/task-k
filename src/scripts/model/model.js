@@ -14,7 +14,7 @@ export function createListModel() {
         return;
       }
 
-      lists[listName] = {todos: []};
+      lists[listName] = {todos: {}};
       save();
     },
 
@@ -33,8 +33,17 @@ export function createListModel() {
     // Todo Funcs //
 
     addTodo(listName, title, notes, priority, datetimedue, isDone=null) {
-      lists[listName].todos.push({title, notes, priority, datetimedue, isDone});
+      const todoID = crypto.randomUUID().toString().slice(0, 8);
+
+      lists[listName].todos[todoID] = {title, notes, priority, datetimedue, isDone};
       save();
+
+      return todoID;
+    },
+
+
+    linkTodoToToday(listName, todoID) {
+      lists[listName].todos[todoID]
     },
 
 
