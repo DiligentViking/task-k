@@ -1,6 +1,6 @@
-import { createListModel } from './model/model.js';
+import { createModel } from './model/model.js';
 
-const model = createListModel();
+const model = createModel();
 
 model.addList('Today');
 model.addList('QWER');

@@ -1,4 +1,4 @@
-export function createListModel() {
+export function createModel() {
   const lists = {};
 
   localStorage.clear();  // Dev

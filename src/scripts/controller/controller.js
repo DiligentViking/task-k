@@ -1,3 +1,3 @@
-function createListController(model, view) {
+function createController(model, view) {
 
 };
