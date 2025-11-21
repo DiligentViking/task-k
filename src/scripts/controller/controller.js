@@ -1,3 +1,3 @@
-function createController(model, view) {
-
+export function createController(model, view) {
+  console.log({model, view});
 };
