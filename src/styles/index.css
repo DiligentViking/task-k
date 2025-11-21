@@ -3,7 +3,9 @@
 }
 
 body {
-  background-color: rgb(51, 51, 51);
+  background-color: #0f0f0f;
+  color: #ede;
+  font-family: 'open-sans', sans-serif;
 }
 
 .todo-app {
@@ -12,13 +14,32 @@ body {
 
 .sidebar {
   border: 1px solid grey;
+  padding: 4px;
 }
 
 .list {
+  background: none;
+  color: #eec;
   display: block;
   margin-bottom: 10px;
 }
 
+.list:hover,
+.checkbox:hover {
+  cursor: pointer;
+}
+
 .today {
   margin-bottom: 20px;
+}
+
+
+.content {
+  margin: 100px;
+}
+
+.todo {
+  border: 1px solid rgb(69, 240, 240, 0.5);
+  margin-bottom: 20px;
+  padding: 4px;
 }

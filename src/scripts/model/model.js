@@ -23,7 +23,9 @@ export function createModel() {
   }
 
   return {
-    getLists() {
+    // List Funcs //
+    
+    getCustomLists() {
       return Object.keys(lists).slice(1);
     },
 
@@ -51,6 +53,11 @@ export function createModel() {
 
 
     // Todo Funcs //
+
+    getTodos(listName) {
+      return lists[listName].todos;
+    },
+
 
     addTodo(listName, title, notes, priority, datetimedue, isDone=null) {
       const todoID = crypto.randomUUID().toString().slice(0, 8);

@@ -19,11 +19,15 @@ controller.init();
 function addAutoContent() {
   model.addList('Today');
   model.addList('QWER');
+  model.addList('ASDF');
 
   const todoID = model.addTodo('QWER', 'Do the campaign', 'Make sure you master the lessons it teaches');
 
   model.linkTodoToToday('QWER', todoID);
   model.markTodoAsDone('Today', todoID);
 
-  model.unlinkTodoFromToday('QWER', todoID);
+  const todoID2 = model.addTodo('QWER', 'Reach singularity rank');
+
+  model.linkTodoToToday('QWER', todoID2);
+  model.markTodoAsDone('Today', todoID2);
 }

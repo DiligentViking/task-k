@@ -21,11 +21,35 @@ export function createView(root=document.querySelector('.todo-app')) {
 
     // Content Funcs //
 
-    renderTodo() {
+    renderHeading(listName) {
+      const h1 = document.createElement('h1');
 
+      h1.textContent = listName;
+
+      content.appendChild(h1);
     },
-    renderTodolist() {
 
+    renderTodo(todoObj) {
+      const todoDiv = document.createElement('div');
+      todoDiv.classList.add('todo');
+
+      const checkbox = document.createElement('input');
+      checkbox.classList.add('checkbox');
+      checkbox.type = 'checkbox';
+
+      const title = document.createElement('p');
+      title.classList.add('.title');
+      title.textContent = todoObj.title;
+
+      const notes = document.createElement('p');
+      notes.classList.add('.notes');
+      notes.textContent = todoObj.notes;
+
+      todoDiv.appendChild(checkbox);
+      todoDiv.appendChild(title);
+      todoDiv.appendChild(notes);
+
+      content.appendChild(todoDiv);
     },
   }
 }
