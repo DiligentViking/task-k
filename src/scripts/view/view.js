@@ -77,6 +77,11 @@ export function createView(root=document.querySelector('.todo-app')) {
     // Dialog Funcs //
 
     displayNewListDialog(controllerFunc) {
+      dialog.textContent = '';
+
+      const h2 = document.createElement('h2');
+      h2.textContent = 'New List';
+
       const newlistForm = document.createElement('form');
       newlistForm.id = 'newlist';
 
@@ -88,6 +93,7 @@ export function createView(root=document.querySelector('.todo-app')) {
       submitButton.id = 'submit';
       submitButton.textContent = 'Submit';
 
+      dialog.appendChild(h2);
       newlistForm.appendChild(listnameInput);
       newlistForm.appendChild(submitButton);
       dialog.appendChild(newlistForm);
@@ -97,7 +103,6 @@ export function createView(root=document.querySelector('.todo-app')) {
       newlistForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        dialog.textContent = '';
         dialog.close();
 
         const listName = listnameInput.value;

@@ -5,7 +5,7 @@
 }
 
 button:hover,
-input:hover {
+input[type="checkbox"]:hover {
   cursor: pointer;
 }
 
@@ -30,10 +30,14 @@ body {
   padding: 4px;
 }
 
-.list {
-  background: none;
-  color: #eec;
+.list,
+.sidebar-tool {
   display: block;
+}
+
+.list {
+  background: inherit;
+  color: #eec;
   margin-bottom: 10px;
 }
 
@@ -41,9 +45,10 @@ body {
   margin-bottom: 20px;
 }
 
-.newlist {
+.sidebar-tool {
   background-color: rgb(69, 69, 69);
   color: #eee;
+  margin-bottom: 5px;
 }
 
 
@@ -65,4 +70,33 @@ body {
 
 dialog::backdrop {
   backdrop-filter: blur(3px);
+}
+
+dialog {
+  background-color: rgb(25, 25, 25);
+  box-shadow: 2px 2px 2px black;
+  border: 1px solid grey;
+}
+
+dialog > h2 {
+  color: #eee;
+  text-align: center;
+  margin-top: 0px;
+}
+
+#listname {
+  background-color: #0f0f0f;
+  color: #eec;
+  caret-color: #eec;
+  padding: 2px;
+}
+
+#listname:focus {
+  outline: none;
+}
+
+#submit {
+  margin-left: 10px;
+  background-color: rgb(69, 69, 69);
+  color: #eee;
 }
