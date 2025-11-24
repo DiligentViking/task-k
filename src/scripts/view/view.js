@@ -1,24 +1,30 @@
 export function createView(root=document.querySelector('.todo-app')) {
   const sidebar = root.querySelector('.sidebar');
   const sidebarNav = sidebar.querySelector('.sidebar-nav');
+  const newlistButton = sidebar.querySelector('.newlist');
 
   const content = root.querySelector('.content');
-  
+
+  const dialog = root.querySelector('dialog');
+
   return {
     // Sidebar Funcs //
 
-    renderCustomLists(customListsArray) {
-      for (const list of customListsArray) {
-        const listButton = document.createElement('button');
-        listButton.classList.add('list');
-        listButton.dataset.list = list;
+    renderListButton(listName) {
+      const listButton = document.createElement('button');
+      listButton.classList.add('list');
+      listButton.dataset.list = listName;
 
-        listButton.textContent = list;
+      listButton.textContent = listName;
 
-        sidebarNav.appendChild(listButton);
-      }
+      sidebarNav.insertBefore(listButton, newlistButton);
     },
 
+    renderCustomLists(customListsArray) {
+      for (const list of customListsArray) {
+        this.renderListButton(list);
+      }
+    },
 
     onListButtonSelect(controllerFunc) {
       sidebar.addEventListener('click', (e) => {
@@ -44,7 +50,6 @@ export function createView(root=document.querySelector('.todo-app')) {
       content.appendChild(h1);
     },
 
-
     renderTodo(todoObj) {
       const todoDiv = document.createElement('div');
       todoDiv.classList.add('todo');
@@ -67,5 +72,43 @@ export function createView(root=document.querySelector('.todo-app')) {
 
       content.appendChild(todoDiv);
     },
-  }
+
+    
+    // Dialog Funcs //
+
+    displayNewListDialog(controllerFunc) {
+      const newlistForm = document.createElement('form');
+      newlistForm.id = 'newlist';
+
+      const listnameInput = document.createElement('input');
+      listnameInput.id = 'listname';
+      listnameInput.type = 'text';
+
+      const submitButton = document.createElement('button');
+      submitButton.id = 'submit';
+      submitButton.textContent = 'Submit';
+
+      newlistForm.appendChild(listnameInput);
+      newlistForm.appendChild(submitButton);
+      dialog.appendChild(newlistForm);
+
+      dialog.showModal();
+
+      newlistForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        dialog.textContent = '';
+        dialog.close();
+
+        const listName = listnameInput.value;
+        controllerFunc(listName);
+      });
+    },
+
+    onNewlistButtonSelect(controllerFunc) {
+      newlistButton.addEventListener('click', () => {
+        this.displayNewListDialog(controllerFunc);  // Watch this (should be view object)
+      });
+    },
+  };
 }

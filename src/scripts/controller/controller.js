@@ -23,6 +23,18 @@ export function createController(model, view) {
       // Content //
 
       renderContentArea('Today');
-      },
+
+
+      // Dialogs //
+
+      view.onNewlistButtonSelect((listName) => {
+        if (!listName) {
+          console.error('No list name');
+          return;
+        }
+        view.renderListButton(listName);
+        model.addList(listName);  // TODO: add error displaying
+      });
+    },
   };
 };
