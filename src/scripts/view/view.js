@@ -11,6 +11,7 @@ export function createView(root=document.querySelector('.todo-app')) {
       for (const list of customListsArray) {
         const listButton = document.createElement('button');
         listButton.classList.add('list');
+        listButton.dataset.list = list;
 
         listButton.textContent = list;
 
@@ -19,7 +20,21 @@ export function createView(root=document.querySelector('.todo-app')) {
     },
 
 
+    onListButtonSelect(controllerFunc) {
+      sidebar.addEventListener('click', (e) => {
+        const listName = e.target.dataset.list;
+        if (listName) {
+          controllerFunc(listName);
+        }
+      });
+    },
+
+
     // Content Funcs //
+
+    clearContentArea() {
+      content.textContent = '';
+    },
 
     renderHeading(listName) {
       const h1 = document.createElement('h1');
@@ -28,6 +43,7 @@ export function createView(root=document.querySelector('.todo-app')) {
 
       content.appendChild(h1);
     },
+
 
     renderTodo(todoObj) {
       const todoDiv = document.createElement('div');

@@ -22,12 +22,12 @@ function addAutoContent() {
   model.addList('ASDF');
 
   const todoID = model.addTodo('QWER', 'Do the campaign', 'Make sure you master the lessons it teaches');
-
   model.linkTodoToToday('QWER', todoID);
   model.markTodoAsDone('Today', todoID);
 
-  const todoID2 = model.addTodo('QWER', 'Reach singularity rank');
-
-  model.linkTodoToToday('QWER', todoID2);
+  const todoID2 = model.addTodo('Today', 'Reach singularity rank');
   model.markTodoAsDone('Today', todoID2);
+
+  const todoID3 = model.addTodo('QWER', 'Try some mods');
+  model.markTodoAsDone('QWER', todoID3);
 }
