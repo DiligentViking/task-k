@@ -3,7 +3,6 @@ export function createView(root=document.querySelector('.todo-app')) {
   const sidebarNav = sidebar.querySelector('.sidebar-nav');
   const sidebarTools = sidebar.querySelector('.sidebar-tools');
   const newlistButton = sidebarTools.querySelector('.newlist');
-  const editlistButton = sidebarTools.querySelector('.editlist');
   const deletelistButton = sidebarTools.querySelector('.deletelist');
 
   const content = root.querySelector('.content');
@@ -31,7 +30,7 @@ export function createView(root=document.querySelector('.todo-app')) {
       sidebar.addEventListener('click', (e) => {
         const listName = e.target.dataset.list;
         if (listName) {
-          controllerFunc(e, listName);
+          controllerFunc(listName);
         }
       });
     },
@@ -77,16 +76,11 @@ export function createView(root=document.querySelector('.todo-app')) {
     
     // Editing Funcs //
 
-    renderEditableListButton(buttonToReplace=null) {
+    renderEditableListButton() {
       const listDiv = document.createElement('div');
       listDiv.classList.add('list', 'editing');
 
-      if (buttonToReplace) {
-        sidebarNav.replaceChild(listDiv, buttonToReplace);
-        listDiv.textContent = buttonToReplace.textContent;
-      } else {
-        sidebarNav.insertBefore(listDiv, sidebarTools);
-      }
+      sidebarNav.insertBefore(listDiv, sidebarTools);
 
       listDiv.contentEditable = 'true';
       listDiv.focus();
@@ -104,10 +98,14 @@ export function createView(root=document.querySelector('.todo-app')) {
       sidebarNav.replaceChild(listButton, editableListButton);
     },
 
-    toggleSidebarCursorEditScheme() {
-      sidebar.classList.toggle('cursor-edit');
+    removeListButton(listName) {
+      sidebarNav.querySelector(`[data-list="${listName}"]`).remove();
+    },
+
+    toggleSidebarCursorDeleteScheme() {
+      sidebar.classList.toggle('cursor-delete');
       sidebarNav.querySelectorAll('*').forEach((node) => {
-        node.classList.toggle('cursor-edit');
+        node.classList.toggle('cursor-delete');
       });
     },
 
@@ -118,8 +116,8 @@ export function createView(root=document.querySelector('.todo-app')) {
       });
     },
 
-    onEditlistButtonSelect(controllerFunc) {
-      editlistButton.addEventListener('click', () => {
+    onDeletelistButtonSelect(controllerFunc) {
+      deletelistButton.addEventListener('click', () => {
         controllerFunc();
       });
     },

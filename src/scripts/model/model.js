@@ -42,9 +42,9 @@ export function createModel() {
 
 
     deleteList(listName) {
-      if (lists[listName].todos.length) {
+      if (Object.keys(lists[listName].todos).length) {
         console.error('List must be empty before deletion');
-        return;
+        return 1;
       }
 
       delete lists[listName];

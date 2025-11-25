@@ -1,5 +1,5 @@
 export function createController(model, view) {
-  let editOnClick = false;
+  let deleteOnClick = false;
 
   const renderContentArea = (listName) => {
     view.clearContentArea();
@@ -17,13 +17,18 @@ export function createController(model, view) {
       // Sidebar //
       view.renderCustomLists(model.getCustomLists());
 
-      view.onListButtonSelect((e, listName) => {
-        console.log('List button selected');
-        if (editOnClick) {
-          editOnClick = false;
-          e.stopPropagation();
-          view.toggleSidebarCursorEditScheme();
-          view.renderEditableListButton(e.target);
+      view.onListButtonSelect((listName) => {
+        if (deleteOnClick) {
+          deleteOnClick = false;
+          view.toggleSidebarCursorDeleteScheme();
+          const statusCode = model.deleteList(listName);
+          if (statusCode === 1) {
+            alert('List must be empty before deletion!');
+          }
+          else {
+            alert('List deleted.');
+            view.removeListButton(listName);
+          }
         }
         else {
           renderContentArea(listName);
@@ -42,14 +47,13 @@ export function createController(model, view) {
         view.renderEditableListButton();
       });
 
-      view.onEditlistButtonSelect(() => {
-        editOnClick = true;
-        view.toggleSidebarCursorEditScheme();
+      view.onDeletelistButtonSelect(() => {
+        deleteOnClick = true;
+        view.toggleSidebarCursorDeleteScheme();
       });
 
       view.onFinishEditing((target, editableListButton, newlistButton) => {
         if (editableListButton && target !== editableListButton && target !== newlistButton) {
-          console.log('Editing finished');
           view.replaceEditableListButtonWithRealListButton(editableListButton);
           model.addList(editableListButton.textContent);
         }

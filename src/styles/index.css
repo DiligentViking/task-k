@@ -65,13 +65,13 @@ body {
 }
 
 
-.sidebar.cursor-edit {
+.sidebar.cursor-delete {
   cursor: crosshair;
 }
-.list.cursor-edit {
+.list.cursor-delete {
   cursor: cell;
 }
-.tool.cursor-edit {
+.tool.cursor-delete {
   cursor: not-allowed;
 }
 
