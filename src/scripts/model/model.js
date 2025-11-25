@@ -23,7 +23,7 @@ export function createModel() {
   }
 
   return {
-    // List Funcs //
+    //// List Funcs ////
     
     getCustomLists() {
       return Object.keys(lists).slice(1);
@@ -52,7 +52,7 @@ export function createModel() {
     },
 
 
-    // Todo Funcs //
+    //// Todo Funcs ////
 
     getTodos(listName) {
       return lists[listName].todos;

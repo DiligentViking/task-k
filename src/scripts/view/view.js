@@ -8,7 +8,7 @@ export function createView(root=document.querySelector('.todo-app')) {
   const content = root.querySelector('.content');
 
   return {
-    // Sidebar Funcs //
+    //// Sidebar Funcs ////
 
     renderListButton(listName) {
       const listButton = document.createElement('button');
@@ -35,46 +35,7 @@ export function createView(root=document.querySelector('.todo-app')) {
       });
     },
 
-
-    // Content Funcs //
-
-    clearContentArea() {
-      content.textContent = '';
-    },
-
-    renderHeading(listName) {
-      const h1 = document.createElement('h1');
-
-      h1.textContent = listName;
-
-      content.appendChild(h1);
-    },
-
-    renderTodo(todoObj) {
-      const todoDiv = document.createElement('div');
-      todoDiv.classList.add('todo');
-
-      const checkbox = document.createElement('input');
-      checkbox.classList.add('checkbox');
-      checkbox.type = 'checkbox';
-
-      const title = document.createElement('p');
-      title.classList.add('.title');
-      title.textContent = todoObj.title;
-
-      const notes = document.createElement('p');
-      notes.classList.add('.notes');
-      notes.textContent = todoObj.notes;
-
-      todoDiv.appendChild(checkbox);
-      todoDiv.appendChild(title);
-      todoDiv.appendChild(notes);
-
-      content.appendChild(todoDiv);
-    },
-
-    
-    // Editing Funcs //
+    // Editing //
 
     renderEditableListButton() {
       const listDiv = document.createElement('div');
@@ -132,6 +93,44 @@ export function createView(root=document.querySelector('.todo-app')) {
         if (e.key !== 'Enter') return;
         controllerFunc(null, editableListButton, newlistButton);
       });
+    },
+
+
+    //// Content Funcs ////
+
+    clearContentArea() {
+      content.textContent = '';
+    },
+
+    renderHeading(listName) {
+      const h1 = document.createElement('h1');
+
+      h1.textContent = listName;
+
+      content.appendChild(h1);
+    },
+
+    renderTodo(todoObj) {
+      const todoDiv = document.createElement('div');
+      todoDiv.classList.add('todo');
+
+      const checkbox = document.createElement('input');
+      checkbox.classList.add('checkbox');
+      checkbox.type = 'checkbox';
+
+      const title = document.createElement('p');
+      title.classList.add('.title');
+      title.textContent = todoObj.title;
+
+      const notes = document.createElement('p');
+      notes.classList.add('.notes');
+      notes.textContent = todoObj.notes;
+
+      todoDiv.appendChild(checkbox);
+      todoDiv.appendChild(title);
+      todoDiv.appendChild(notes);
+
+      content.appendChild(todoDiv);
     },
   };
 }

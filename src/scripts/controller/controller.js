@@ -10,11 +10,14 @@ export function createController(model, view) {
     Object.keys(todos).forEach((todoObjKey) => { 
       view.renderTodo(todos[todoObjKey]);
     });
+
+    view.renderCreateTodoButton();
   }
 
   return {
     init() {
-      // Sidebar //
+      //// Sidebar ////
+
       view.renderCustomLists(model.getCustomLists());
 
       view.onListButtonSelect((listName) => {
@@ -35,12 +38,6 @@ export function createController(model, view) {
         }
       });
 
-
-      // Content //
-
-      renderContentArea('Today');
-
-
       // Editing //
 
       view.onNewlistButtonSelect(() => {
@@ -58,6 +55,11 @@ export function createController(model, view) {
           model.addList(editableListButton.textContent);
         }
       });
+
+
+      //// Content ////
+
+      renderContentArea('Today');
     },
   };
 };
