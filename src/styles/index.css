@@ -65,6 +65,17 @@ body {
 }
 
 
+.sidebar.cursor-edit {
+  cursor: crosshair;
+}
+.list.cursor-edit {
+  cursor: cell;
+}
+.tool.cursor-edit {
+  cursor: not-allowed;
+}
+
+
 /* Content */
 
 .content {

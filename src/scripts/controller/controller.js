@@ -1,4 +1,6 @@
 export function createController(model, view) {
+  let editOnClick = false;
+
   const renderContentArea = (listName) => {
     view.clearContentArea();
 
@@ -15,8 +17,15 @@ export function createController(model, view) {
       // Sidebar //
       view.renderCustomLists(model.getCustomLists());
 
-      view.onListButtonSelect((listName) => {
-        if (listName) {
+      view.onListButtonSelect((e, listName) => {
+        console.log('List button selected');
+        if (editOnClick) {
+          editOnClick = false;
+          e.stopPropagation();
+          view.toggleSidebarCursorEditScheme();
+          view.renderEditableListButton(e.target);
+        }
+        else {
           renderContentArea(listName);
         }
       });
@@ -27,14 +36,20 @@ export function createController(model, view) {
       renderContentArea('Today');
 
 
-      // Dialogs //
+      // Editing //
 
       view.onNewlistButtonSelect(() => {
         view.renderEditableListButton();
       });
 
+      view.onEditlistButtonSelect(() => {
+        editOnClick = true;
+        view.toggleSidebarCursorEditScheme();
+      });
+
       view.onFinishEditing((target, editableListButton, newlistButton) => {
         if (editableListButton && target !== editableListButton && target !== newlistButton) {
+          console.log('Editing finished');
           view.replaceEditableListButtonWithRealListButton(editableListButton);
           model.addList(editableListButton.textContent);
         }

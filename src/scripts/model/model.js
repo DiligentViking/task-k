@@ -33,7 +33,7 @@ export function createModel() {
     addList(listName) {
       if (lists[listName]) {
         console.error('List already exists');
-        return;
+        return 1;
       }
 
       lists[listName] = {todos: {}};

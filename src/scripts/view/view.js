@@ -30,7 +30,9 @@ export function createView(root=document.querySelector('.todo-app')) {
     onListButtonSelect(controllerFunc) {
       sidebar.addEventListener('click', (e) => {
         const listName = e.target.dataset.list;
-        controllerFunc(listName);
+        if (listName) {
+          controllerFunc(e, listName);
+        }
       });
     },
 
@@ -75,11 +77,16 @@ export function createView(root=document.querySelector('.todo-app')) {
     
     // Editing Funcs //
 
-    renderEditableListButton() {
+    renderEditableListButton(buttonToReplace=null) {
       const listDiv = document.createElement('div');
       listDiv.classList.add('list', 'editing');
 
-      sidebarNav.insertBefore(listDiv, sidebarTools);
+      if (buttonToReplace) {
+        sidebarNav.replaceChild(listDiv, buttonToReplace);
+        listDiv.textContent = buttonToReplace.textContent;
+      } else {
+        sidebarNav.insertBefore(listDiv, sidebarTools);
+      }
 
       listDiv.contentEditable = 'true';
       listDiv.focus();
@@ -97,6 +104,26 @@ export function createView(root=document.querySelector('.todo-app')) {
       sidebarNav.replaceChild(listButton, editableListButton);
     },
 
+    toggleSidebarCursorEditScheme() {
+      sidebar.classList.toggle('cursor-edit');
+      sidebarNav.querySelectorAll('*').forEach((node) => {
+        node.classList.toggle('cursor-edit');
+      });
+    },
+
+
+    onNewlistButtonSelect(controllerFunc) {
+      newlistButton.addEventListener('click', () => {
+        controllerFunc();
+      });
+    },
+
+    onEditlistButtonSelect(controllerFunc) {
+      editlistButton.addEventListener('click', () => {
+        controllerFunc();
+      });
+    },
+
     onFinishEditing(controllerFunc) {
       window.addEventListener('click', (e) => {
         const editableListButton = document.querySelector('.list.editing');
@@ -106,12 +133,6 @@ export function createView(root=document.querySelector('.todo-app')) {
         const editableListButton = document.querySelector('.list.editing');
         if (e.key !== 'Enter') return;
         controllerFunc(null, editableListButton, newlistButton);
-      });
-    },
-
-    onNewlistButtonSelect(controllerFunc) {
-      newlistButton.addEventListener('click', () => {
-        controllerFunc();
       });
     },
   };
