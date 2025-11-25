@@ -1,7 +1,7 @@
 export function createView(root=document.querySelector('.todo-app')) {
   const sidebar = root.querySelector('.sidebar');
   const sidebarNav = sidebar.querySelector('.sidebar-nav');
-  const newlistButton = sidebar.querySelector('.newlist');
+  const sidebarTools = sidebar.querySelector('.sidebar-tools');
 
   const content = root.querySelector('.content');
 
@@ -17,7 +17,7 @@ export function createView(root=document.querySelector('.todo-app')) {
 
       listButton.textContent = listName;
 
-      sidebarNav.insertBefore(listButton, newlistButton);
+      sidebarNav.insertBefore(listButton, sidebarTools);
     },
 
     renderCustomLists(customListsArray) {
@@ -111,7 +111,7 @@ export function createView(root=document.querySelector('.todo-app')) {
     },
 
     onNewlistButtonSelect(controllerFunc) {
-      newlistButton.addEventListener('click', () => {
+      document.querySelector('.new').addEventListener('click', () => {
         this.displayNewListDialog(controllerFunc);  // Watch this (should be view object)
       });
     },

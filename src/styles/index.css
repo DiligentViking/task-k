@@ -18,7 +18,7 @@ body {
   font-family: 'open-sans', sans-serif;
 }
 
-.todo-app {
+.row-group {
   display: flex;
 }
 
@@ -30,8 +30,14 @@ body {
   padding: 4px;
 }
 
-.list,
-.sidebar-tool {
+.sidebar-nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.list {
   display: block;
 }
 
@@ -45,10 +51,18 @@ body {
   margin-bottom: 20px;
 }
 
-.sidebar-tool {
+
+.sidebar-tools {
+  width: 100%;
+  margin-top: auto;
+}
+
+.tool {
   background-color: rgb(69, 69, 69);
   color: #eee;
-  margin-bottom: 5px;
+  display: block;
+  width: 100%;
+  margin-bottom: 2px;
 }
 
 
