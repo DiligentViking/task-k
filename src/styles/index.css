@@ -38,12 +38,11 @@ body {
 }
 
 .list {
-  display: block;
-}
-
-.list {
   background: inherit;
   color: #eec;
+  display: block;
+  padding: 1px 6px;
+  width: auto;
   margin-bottom: 10px;
 }
 

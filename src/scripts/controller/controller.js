@@ -16,7 +16,9 @@ export function createController(model, view) {
       view.renderCustomLists(model.getCustomLists());
 
       view.onListButtonSelect((listName) => {
-        renderContentArea(listName);
+        if (listName) {
+          renderContentArea(listName);
+        }
       });
 
 
@@ -27,13 +29,15 @@ export function createController(model, view) {
 
       // Dialogs //
 
-      view.onNewlistButtonSelect((listName) => {
-        if (!listName) {
-          console.error('No list name');
-          return;
+      view.onNewlistButtonSelect(() => {
+        view.renderEditableListButton();
+      });
+
+      view.onFinishEditing((target, editableListButton, newlistButton) => {
+        if (editableListButton && target !== editableListButton && target !== newlistButton) {
+          view.replaceEditableListButtonWithRealListButton(editableListButton);
+          model.addList(editableListButton.textContent);
         }
-        view.renderListButton(listName);
-        model.addList(listName);  // TODO: add error displaying
       });
     },
   };
