@@ -74,46 +74,7 @@ export function createView(root=document.querySelector('.todo-app')) {
     },
 
     
-    // Dialog Funcs //
+    //  //
 
-    displayNewListDialog(controllerFunc) {
-      dialog.textContent = '';
-
-      const h2 = document.createElement('h2');
-      h2.textContent = 'New List';
-
-      const newlistForm = document.createElement('form');
-      newlistForm.id = 'newlist';
-
-      const listnameInput = document.createElement('input');
-      listnameInput.id = 'listname';
-      listnameInput.type = 'text';
-
-      const submitButton = document.createElement('button');
-      submitButton.id = 'submit';
-      submitButton.textContent = 'Submit';
-
-      dialog.appendChild(h2);
-      newlistForm.appendChild(listnameInput);
-      newlistForm.appendChild(submitButton);
-      dialog.appendChild(newlistForm);
-
-      dialog.showModal();
-
-      newlistForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        dialog.close();
-
-        const listName = listnameInput.value;
-        controllerFunc(listName);
-      });
-    },
-
-    onNewlistButtonSelect(controllerFunc) {
-      document.querySelector('.new').addEventListener('click', () => {
-        this.displayNewListDialog(controllerFunc);  // Watch this (should be view object)
-      });
-    },
   };
 }

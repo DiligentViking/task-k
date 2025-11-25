@@ -78,39 +78,3 @@ body {
   margin-bottom: 20px;
   padding: 4px;
 }
-
-
-/* Dialog */
-
-dialog::backdrop {
-  backdrop-filter: blur(3px);
-}
-
-dialog {
-  background-color: rgb(25, 25, 25);
-  box-shadow: 2px 2px 2px black;
-  border: 1px solid grey;
-}
-
-dialog > h2 {
-  color: #eee;
-  text-align: center;
-  margin-top: 0px;
-}
-
-#listname {
-  background-color: #0f0f0f;
-  color: #eec;
-  caret-color: #eec;
-  padding: 2px;
-}
-
-#listname:focus {
-  outline: none;
-}
-
-#submit {
-  margin-left: 10px;
-  background-color: rgb(69, 69, 69);
-  color: #eee;
-}
