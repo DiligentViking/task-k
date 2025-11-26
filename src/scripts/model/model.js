@@ -58,6 +58,10 @@ export function createModel() {
       return lists[listName].todos;
     },
 
+    getTodo(listName, todoID) {
+      return lists[listName].todos[todoID];
+    },
+
 
     addTodo(listName, title, notes, priority, datetimedue, isDone=null) {
       const todoID = crypto.randomUUID().toString().slice(0, 8);
@@ -98,6 +102,17 @@ export function createModel() {
 
     markTodoAsNotDone(listName, todoID) {
       updateTodo(listName, todoID, 'isDone', null);
+      save();
+    },
+
+
+    updateTodoTitle(listName, todoID, newTitle) {
+      updateTodo(listName, todoID, 'title', newTitle);
+      save();
+    },
+
+    updateTodoNotes(listName, todoID, newNotes) {
+      updateTodo(listName, todoID, 'title', newNotes);
       save();
     },
   };

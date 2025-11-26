@@ -10,7 +10,7 @@ export function createController(model, view) {
 
     const todos = model.getTodos(listName);
     Object.keys(todos).forEach((todoObjKey) => { 
-      view.renderTodo(todos[todoObjKey]);
+      view.renderTodo(todoObjKey, todos[todoObjKey]);
     });
 
     view.renderCreateTodoButton();
@@ -52,8 +52,8 @@ export function createController(model, view) {
         view.toggleSidebarCursorDeleteScheme();
       });
 
-      view.onFinishEditing((target, editableListButton, newlistButton) => {
-        if (editableListButton && target !== editableListButton && target !== newlistButton) {
+      view.onFinishSidebarEditing((clickTarget, editableListButton, newlistButton) => {
+        if (editableListButton && clickTarget !== editableListButton && clickTarget !== newlistButton) {
           view.replaceEditableListButtonWithRealListButton(editableListButton);
           model.addList(editableListButton.textContent);
         }
@@ -64,11 +64,30 @@ export function createController(model, view) {
 
       renderContentArea('Today');
 
-      view.onContentAreaSelect((targetClass) => {
+      view.onContentAreaSelect((target) => {
+        const targetClass = target.classList[0];
         switch (targetClass) {
           case 'create-todo':
-            view.renderTodo({});
-            model.addTodo(activeList);
+            const todoID = model.addTodo(activeList);
+            const todoObj = model.getTodo(activeList, todoID);
+            view.renderTodo(todoID, todoObj, true);
+            break;
+          case 'title':
+            view.putTodoTextElemIntoEditingMode(target);
+            break;
+        }
+      });
+
+      view.onFinishContentEditing((clickTarget, editableTextElem, createTodoButton) => {
+        if (editableTextElem && clickTarget !== editableTextElem && clickTarget !== createTodoButton) {
+          view.takeTodoTextElemOutOfEditingMode(editableTextElem);
+          const todoID = editableTextElem.parentNode.dataset.todoid;
+          const newVal = editableTextElem.textContent;
+          if (editableTextElem.classList[0] === 'title') {
+            model.updateTodoTitle(activeList, todoID, newVal);
+          } else if (editableTextElem.classList[0] === 'notes') {
+            model.updateTodoNotes(activeList, todoID, newVal);
+          }
         }
       });
     },

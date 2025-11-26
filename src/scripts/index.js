@@ -30,4 +30,7 @@ function addAutoContent() {
 
   const todoID3 = model.addTodo('QWER', 'Try some mods');
   model.markTodoAsDone('QWER', todoID3);
+
+  const todoID4 = model.addTodo('QWER', 'Make some mods');
+  model.markTodoAsDone('QWER', todoID4);
 }

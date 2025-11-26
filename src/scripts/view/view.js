@@ -83,13 +83,13 @@ export function createView(root=document.querySelector('.todo-app')) {
       });
     },
 
-    onFinishEditing(controllerFunc) {
+    onFinishSidebarEditing(controllerFunc) {
       window.addEventListener('click', (e) => {
-        const editableListButton = document.querySelector('.list.editing');
+        const editableListButton = sidebar.querySelector('.list.editing');
         controllerFunc(e.target, editableListButton, newlistButton);
       });
       window.addEventListener('keydown', (e) => {
-        const editableListButton = document.querySelector('.list.editing');
+        const editableListButton = sidebar.querySelector('.list.editing');
         if (e.key !== 'Enter') return;
         controllerFunc(null, editableListButton, newlistButton);
       });
@@ -110,20 +110,21 @@ export function createView(root=document.querySelector('.todo-app')) {
       content.appendChild(h1);
     },
 
-    renderTodo(todoObj) {
+    renderTodo(todoID, todoObj, newTodo=false) {
       const todoDiv = document.createElement('div');
       todoDiv.classList.add('todo');
+      todoDiv.dataset.todoid = todoID;
 
       const checkbox = document.createElement('input');
       checkbox.classList.add('checkbox');
       checkbox.type = 'checkbox';
 
       const title = document.createElement('p');
-      title.classList.add('.title');
+      title.classList.add('title');
       title.textContent = todoObj.title;
 
       const notes = document.createElement('p');
-      notes.classList.add('.notes');
+      notes.classList.add('notes');
       notes.textContent = todoObj.notes;
 
       todoDiv.appendChild(checkbox);
@@ -131,6 +132,8 @@ export function createView(root=document.querySelector('.todo-app')) {
       todoDiv.appendChild(notes);
 
       content.appendChild(todoDiv);
+
+      if (newTodo) this.putTodoTextElemIntoEditingMode(title);
     },
 
     renderCreateTodoButton() {
@@ -142,9 +145,36 @@ export function createView(root=document.querySelector('.todo-app')) {
       content.appendChild(createTodoButton);
     },
 
+
+    putTodoTextElemIntoEditingMode(target) {
+      target.classList.add('editing');
+      target.contentEditable = 'true';
+      target.focus();
+    },
+
+    takeTodoTextElemOutOfEditingMode(editableTextElem) {
+      editableTextElem.classList.remove('editing');
+      editableTextElem.contentEditable = 'false';
+    },
+
     onContentAreaSelect(controllerFunc) {
       content.addEventListener('click', (e) => {
-        controllerFunc(e.target.classList[0]);
+        controllerFunc(e.target);
+      });
+    },
+
+    onFinishContentEditing(controllerFunc) {  // a bit redundant, but SRP
+      window.addEventListener('click', (e) => {
+        const editableTextElem = content.querySelector('.editing');
+        const createTodoButton = content.querySelector('.create-todo');
+        controllerFunc(e.target, editableTextElem, createTodoButton);
+      });
+      window.addEventListener('keydown', (e) => {
+        const editableTextElem = content.querySelector('.editing');
+        const createTodoButton = content.querySelector('.create-todo');
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        controllerFunc(null, editableTextElem, createTodoButton);
       });
     },
   };
