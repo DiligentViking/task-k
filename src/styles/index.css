@@ -88,3 +88,10 @@ body {
   margin-bottom: 20px;
   padding: 4px;
 }
+
+.create-todo {
+  background: none;
+  color: rgb(69, 240, 240, 0.75);
+  border: 1px solid rgb(69, 240, 240, 0.5);
+  padding: 6px 12px;
+}

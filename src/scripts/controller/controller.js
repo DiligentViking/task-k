@@ -1,4 +1,6 @@
 export function createController(model, view) {
+  let activeList = 'Today';
+
   let deleteOnClick = false;
 
   const renderContentArea = (listName) => {
@@ -34,6 +36,7 @@ export function createController(model, view) {
           }
         }
         else {
+          activeList = listName;
           renderContentArea(listName);
         }
       });
@@ -60,6 +63,14 @@ export function createController(model, view) {
       //// Content ////
 
       renderContentArea('Today');
+
+      view.onContentAreaSelect((targetClass) => {
+        switch (targetClass) {
+          case 'create-todo':
+            view.renderTodo({});
+            model.addTodo(activeList);
+        }
+      });
     },
   };
 };

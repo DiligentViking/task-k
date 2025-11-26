@@ -132,5 +132,20 @@ export function createView(root=document.querySelector('.todo-app')) {
 
       content.appendChild(todoDiv);
     },
+
+    renderCreateTodoButton() {
+      const createTodoButton = document.createElement('button');
+      createTodoButton.classList.add('create-todo');
+
+      createTodoButton.textContent = 'Create Todo';
+
+      content.appendChild(createTodoButton);
+    },
+
+    onContentAreaSelect(controllerFunc) {
+      content.addEventListener('click', (e) => {
+        controllerFunc(e.target.classList[0]);
+      });
+    },
   };
 }
