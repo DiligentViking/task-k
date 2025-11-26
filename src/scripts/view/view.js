@@ -118,6 +118,12 @@ export function createView(root=document.querySelector('.todo-app')) {
       const checkbox = document.createElement('input');
       checkbox.classList.add('checkbox');
       checkbox.type = 'checkbox';
+      console.log({isdone: todoObj.isDone});
+      if (todoObj.isDone === 1) {
+        checkbox.checked = 'true';
+      } else if (todoObj.isDone === null) {
+        checkbox.checked = '';
+      }
 
       const title = document.createElement('p');
       title.classList.add('title');
