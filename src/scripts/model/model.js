@@ -112,7 +112,7 @@ export function createModel() {
     },
 
     updateTodoNotes(listName, todoID, newNotes) {
-      updateTodo(listName, todoID, 'title', newNotes);
+      updateTodo(listName, todoID, 'notes', newNotes);
       save();
     },
   };

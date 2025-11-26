@@ -73,12 +73,14 @@ export function createController(model, view) {
             view.renderTodo(todoID, todoObj, true);
             break;
           case 'title':
+          case 'notes':
             view.putTodoTextElemIntoEditingMode(target);
             break;
           case 'checkbox':
             const todoID_ = target.parentNode.dataset.todoid;
             if (target.checked) model.markTodoAsDone(activeList, todoID_);
             if (!target.checked) model.markTodoAsNotDone(activeList, todoID_);
+            break;
         }
       });
 

@@ -95,3 +95,17 @@ body {
   border: 1px solid rgb(69, 240, 240, 0.5);
   padding: 6px 12px;
 }
+
+.title,
+.notes {
+  font-size: 16px;
+  padding: 4px 0px;
+  margin: 8px 4px;
+}
+
+/* .notes {
+  color: rgb(238, 221, 238, 0.75);
+  font-size: 14px;
+  padding: 4px 0px;
+  margin: 8px 4px 8px 10px;
+} */
