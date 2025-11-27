@@ -17,6 +17,8 @@ controller.init();
 
 /* Dev */
 function addAutoContent() {
+  if (localStorage.getItem('lists')) return;
+
   model.addList('Today');
   model.addList('QWER');
   model.addList('ASDF');

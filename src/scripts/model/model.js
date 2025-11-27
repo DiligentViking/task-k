@@ -1,7 +1,6 @@
 export function createModel() {
-  const lists = {};
-
-  localStorage.clear();  // Dev
+  const listsStorage = localStorage.getItem('lists');
+  const lists = (listsStorage) ? JSON.parse(listsStorage) : {};
 
   const save = () => {
     localStorage.setItem('lists', JSON.stringify(lists));
