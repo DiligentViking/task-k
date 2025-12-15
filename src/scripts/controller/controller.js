@@ -1,5 +1,5 @@
 export function createController(model, view) {
-  let activeList = 'Today';
+  let activeList = "Today";
 
   let deleteOnClick = false;
 
@@ -9,12 +9,12 @@ export function createController(model, view) {
     view.renderHeading(listName);
 
     const todos = model.getTodos(listName);
-    Object.keys(todos).forEach((todoObjKey) => { 
+    Object.keys(todos).forEach((todoObjKey) => {
       view.renderTodo(todoObjKey, todos[todoObjKey]);
     });
 
     view.renderCreateTodoButton();
-  }
+  };
 
   return {
     init() {
@@ -28,14 +28,12 @@ export function createController(model, view) {
           view.toggleSidebarCursorDeleteScheme();
           const statusCode = model.deleteList(listName);
           if (statusCode === 1) {
-            alert('List must be empty before deletion!');
-          }
-          else {
-            alert('List deleted.');
+            alert("List must be empty before deletion!");
+          } else {
+            alert("List deleted.");
             view.removeListButton(listName);
           }
-        }
-        else {
+        } else {
           activeList = listName;
           renderContentArea(listName);
         }
@@ -52,31 +50,38 @@ export function createController(model, view) {
         view.toggleSidebarCursorDeleteScheme();
       });
 
-      view.onFinishSidebarEditing((clickTarget, editableListButton, newlistButton) => {
-        if (editableListButton && clickTarget !== editableListButton && clickTarget !== newlistButton) {
-          view.replaceEditableListButtonWithRealListButton(editableListButton);
-          model.addList(editableListButton.textContent);
-        }
-      });
-
+      view.onFinishSidebarEditing(
+        (clickTarget, editableListButton, newlistButton) => {
+          if (
+            editableListButton &&
+            clickTarget !== editableListButton &&
+            clickTarget !== newlistButton
+          ) {
+            view.replaceEditableListButtonWithRealListButton(
+              editableListButton,
+            );
+            model.addList(editableListButton.textContent);
+          }
+        },
+      );
 
       //// Content ////
 
-      renderContentArea('Today');
+      renderContentArea("Today");
 
       view.onContentAreaSelect((target) => {
         const targetClass = target.classList[0];
         switch (targetClass) {
-          case 'create-todo':
+          case "create-todo":
             const todoID = model.addTodo(activeList);
             const todoObj = model.getTodo(activeList, todoID);
             view.renderTodo(todoID, todoObj, true);
             break;
-          case 'title':
-          case 'notes':
+          case "title":
+          case "notes":
             view.putTodoTextElemIntoEditingMode(target);
             break;
-          case 'checkbox':
+          case "checkbox":
             const todoID_ = target.parentNode.dataset.todoid;
             if (target.checked) model.markTodoAsDone(activeList, todoID_);
             if (!target.checked) model.markTodoAsNotDone(activeList, todoID_);
@@ -84,18 +89,24 @@ export function createController(model, view) {
         }
       });
 
-      view.onFinishContentEditing((clickTarget, editableTextElem, createTodoButton) => {
-        if (editableTextElem && clickTarget !== editableTextElem && clickTarget !== createTodoButton) {
-          view.takeTodoTextElemOutOfEditingMode(editableTextElem);
-          const todoID = editableTextElem.parentNode.dataset.todoid;
-          const newVal = editableTextElem.textContent;
-          if (editableTextElem.classList[0] === 'title') {
-            model.updateTodoTitle(activeList, todoID, newVal);
-          } else if (editableTextElem.classList[0] === 'notes') {
-            model.updateTodoNotes(activeList, todoID, newVal);
+      view.onFinishContentEditing(
+        (clickTarget, editableTextElem, createTodoButton) => {
+          if (
+            editableTextElem &&
+            clickTarget !== editableTextElem &&
+            clickTarget !== createTodoButton
+          ) {
+            view.takeTodoTextElemOutOfEditingMode(editableTextElem);
+            const todoID = editableTextElem.parentNode.dataset.todoid;
+            const newVal = editableTextElem.textContent;
+            if (editableTextElem.classList[0] === "title") {
+              model.updateTodoTitle(activeList, todoID, newVal);
+            } else if (editableTextElem.classList[0] === "notes") {
+              model.updateTodoNotes(activeList, todoID, newVal);
+            }
           }
-        }
-      });
+        },
+      );
     },
   };
-};
+}

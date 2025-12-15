@@ -1,55 +1,52 @@
 export function createModel() {
-  const listsStorage = localStorage.getItem('lists');
-  const lists = (listsStorage) ? JSON.parse(listsStorage) : {};
+  const listsStorage = localStorage.getItem("lists");
+  const lists = listsStorage ? JSON.parse(listsStorage) : {};
 
   const save = () => {
-    localStorage.setItem('lists', JSON.stringify(lists));
-  }
+    localStorage.setItem("lists", JSON.stringify(lists));
+  };
 
   const updateTodo = (listName, todoID, prop, val) => {
     const todo = lists[listName].todos[todoID];
     todo[prop] = val;
-    if (todo['link']) {
-      if (listName === 'Today') {
-        const sourceTodo = lists[todo['link']].todos[todoID];
+    if (todo["link"]) {
+      if (listName === "Today") {
+        const sourceTodo = lists[todo["link"]].todos[todoID];
         sourceTodo[prop] = val;
       } else {
-        if (prop === 'link') return;
-        const todayTodo = lists['Today'].todos[todoID];
+        if (prop === "link") return;
+        const todayTodo = lists["Today"].todos[todoID];
         todayTodo[prop] = val;
       }
     }
-  }
+  };
 
   return {
     //// List Funcs ////
-    
+
     getCustomLists() {
       return Object.keys(lists).slice(1);
     },
 
-
     addList(listName) {
       if (lists[listName]) {
-        console.error('List already exists');
+        console.error("List already exists");
         return 1;
       }
 
-      lists[listName] = {todos: {}};
+      lists[listName] = { todos: {} };
       save();
     },
 
-
     deleteList(listName) {
       if (Object.keys(lists[listName].todos).length) {
-        console.error('List must be empty before deletion');
+        console.error("List must be empty before deletion");
         return 1;
       }
 
       delete lists[listName];
       save();
     },
-
 
     //// Todo Funcs ////
 
@@ -61,57 +58,58 @@ export function createModel() {
       return lists[listName].todos[todoID];
     },
 
-
-    addTodo(listName, title, notes, priority, datetimedue, isDone=null) {
+    addTodo(listName, title, notes, priority, datetimedue, isDone = null) {
       const todoID = crypto.randomUUID().toString().slice(0, 8);
 
-      lists[listName].todos[todoID] = {title, notes, priority, datetimedue, isDone};
+      lists[listName].todos[todoID] = {
+        title,
+        notes,
+        priority,
+        datetimedue,
+        isDone,
+      };
       save();
 
       return todoID;
     },
 
-
     deleteTodo(listName, todoID) {
-      if ('link' in lists[listName].todos[todoID] && listName !== 'Today') {
-        delete lists['Today'].todos[todoID];
+      if ("link" in lists[listName].todos[todoID] && listName !== "Today") {
+        delete lists["Today"].todos[todoID];
       }
       delete lists[listName].todos[todoID];
       save();
     },
 
-
     linkTodoToToday(listName, todoID) {
-      updateTodo(listName, todoID, 'link', listName);
-      lists['Today'].todos[todoID] = lists[listName].todos[todoID];
-      save();
-    },
-    
-    unlinkTodoFromToday(listName, todoID) {
-      delete lists['Today'].todos[todoID];
-      updateTodo(listName, todoID, 'link', null);
+      updateTodo(listName, todoID, "link", listName);
+      lists["Today"].todos[todoID] = lists[listName].todos[todoID];
       save();
     },
 
+    unlinkTodoFromToday(listName, todoID) {
+      delete lists["Today"].todos[todoID];
+      updateTodo(listName, todoID, "link", null);
+      save();
+    },
 
     markTodoAsDone(listName, todoID) {
-      updateTodo(listName, todoID, 'isDone', 1);
+      updateTodo(listName, todoID, "isDone", 1);
       save();
     },
 
     markTodoAsNotDone(listName, todoID) {
-      updateTodo(listName, todoID, 'isDone', null);
+      updateTodo(listName, todoID, "isDone", null);
       save();
     },
 
-
     updateTodoTitle(listName, todoID, newTitle) {
-      updateTodo(listName, todoID, 'title', newTitle);
+      updateTodo(listName, todoID, "title", newTitle);
       save();
     },
 
     updateTodoNotes(listName, todoID, newNotes) {
-      updateTodo(listName, todoID, 'notes', newNotes);
+      updateTodo(listName, todoID, "notes", newNotes);
       save();
     },
   };

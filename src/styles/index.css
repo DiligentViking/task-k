@@ -9,19 +9,17 @@ input[type="checkbox"]:hover {
   cursor: pointer;
 }
 
-
 /* Base */
 
 body {
   background-color: #0f0f0f;
   color: #ede;
-  font-family: 'open-sans', sans-serif;
+  font-family: "open-sans", sans-serif;
 }
 
 .row-group {
   display: flex;
 }
-
 
 /* Sidebar */
 
@@ -50,7 +48,6 @@ body {
   margin-bottom: 20px;
 }
 
-
 .sidebar-tools {
   width: 100%;
   margin-top: auto;
@@ -64,7 +61,6 @@ body {
   margin-bottom: 2px;
 }
 
-
 .sidebar.cursor-delete {
   cursor: crosshair;
 }
@@ -74,7 +70,6 @@ body {
 .tool.cursor-delete {
   cursor: not-allowed;
 }
-
 
 /* Content */
 
